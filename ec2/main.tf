@@ -3,6 +3,7 @@ resource "aws_instance" "was" {
     instance_type = "t2.micro"
     subnet_id = var.public_subnet_id
     vpc_security_group_ids = [aws_security_group.was_sg.id]
+    key_name = "ubuntu_river"
 
     user_data = <<-EOF
         #!/bin/bash
@@ -28,6 +29,13 @@ resource "aws_security_group" "was_sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
 }
