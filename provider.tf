@@ -1,3 +1,8 @@
 provider "aws" {
-    region = "ap-northest-2"
+    region = "ap-northeast-2"
+    default_tags {
+      tags = {
+        Origin = "Created By Terraform"
+      }
+    }
 }
