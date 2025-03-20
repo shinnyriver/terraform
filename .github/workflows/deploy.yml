@@ -3,7 +3,10 @@ name: Terraform CI/CD Pipeline
 on:
   pull_request:
     branches:
-      - deploy  # 🔹 deploy 브랜치로 PR이 생성되었을 때 Terraform Plan 실행
+      - deploy  # 🔹 PR이 `deploy` 브랜치로 생성되면 Terraform Plan 실행
+  push:
+    branches:
+      - deploy  # 🔹 `deploy` 브랜치로 머지되면 Terraform Apply 실행
 
 jobs:
   terraform:
@@ -37,7 +40,7 @@ jobs:
           TF_INPUT: false
 
       - name: Terraform Apply (only on deploy branch)
-        if: github.ref == 'refs/heads/deploy'  # 🔹 메인 브랜치에서만 실행
+        if: github.event_name == 'push'  # 🔹 `deploy` 브랜치에 머지된 경우 실행
         run: terraform apply -auto-approve tfplan
         env:
           TF_INPUT: false
