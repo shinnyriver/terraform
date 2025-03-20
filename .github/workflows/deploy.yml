@@ -1,12 +1,9 @@
 name: Terraform CI/CD Pipeline
 
 on:
-  push:
-    branches:
-      - main  # 🔹 메인 브랜치에 푸시될 때만 실행
   pull_request:
     branches:
-      - main  # 🔹 메인 브랜치로 PR이 생성되었을 때 Terraform Plan 실행
+      - deploy  # 🔹 deploy 브랜치로 PR이 생성되었을 때 Terraform Plan 실행
 
 jobs:
   terraform:
