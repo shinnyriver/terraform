@@ -16,19 +16,3 @@ module "cluster" {
   public_subnet1_cidr = module.vpc.public_subnet1_cidr
   public_subnet2_cidr = module.vpc.public_subnet2_cidr
 }
-
-module "backend" {
-    source = "./backend"
-}
-
-terraform {
-    required_version = ">= 1.0.0, < 2.0.0"
-    backend "s3" {
-        bucket = "990323-river-practice"
-        key = "vpc/terraform.tfstate"
-        region = "ap-northeast-2"
-        encrypt = true
-        use_lockfile = true
-      
-    }
-}

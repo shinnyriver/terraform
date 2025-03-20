@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "terraform_state" {
-    bucket = "990323-river-practice"
+    bucket = "990323-river-practice4"
 }
 
 resource "aws_s3_bucket_versioning" "enabled" {
