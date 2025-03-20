@@ -36,8 +36,8 @@ jobs:
         env:
           TF_INPUT: false
 
-      - name: Terraform Apply (only on main branch)
-        if: github.ref == 'refs/heads/main'  # 🔹 메인 브랜치에서만 실행
+      - name: Terraform Apply (only on deploy branch)
+        if: github.ref == 'refs/heads/deploy'  # 🔹 메인 브랜치에서만 실행
         run: terraform apply -auto-approve tfplan
         env:
           TF_INPUT: false
