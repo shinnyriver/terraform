@@ -39,8 +39,11 @@ jobs:
         env:
           TF_INPUT: false
 
+      - name: Debug GitHub Ref
+        run: 'echo "Current ref: ${{ github.ref }} | Event: ${{ github.event_name }}"'
+
       - name: Terraform Apply (only on deploy branch)
-        if: github.event_name == 'push'  # 🔹 `deploy` 브랜치에 머지된 경우 실행
+        if: github.event_name == 'push' && github.ref == 'refs/heads/deploy'  # 🔹 `deploy` 브랜치에서만 실행
         run: terraform apply -auto-approve tfplan
         env:
           TF_INPUT: false
