@@ -47,6 +47,18 @@ resource "aws_autoscaling_group" "webserver_asg" {
       id = aws_launch_template.webserver_template.id
       version = "$Latest"
     }
+
+    tag {
+      key = "Name"
+      value = "webserver-asg"
+      propagate_at_launch = true
+    }
+
+    tag {
+      key = "Environment"
+      value = "production"
+      propagate_at_launch = true
+    }
 }
 
 resource "aws_security_group" "alb_sg" {
