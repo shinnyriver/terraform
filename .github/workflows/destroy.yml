@@ -3,11 +3,6 @@ name: Terraform Destroy
 on:
   workflow_dispatch:  # 🔹 수동 실행 트리거
 
-env:
-  AWS_REGION: ap-northeast-2  # 🔹 AWS 리전 설정
-  TF_STATE_BUCKET: 990323-river-practice4  # 🔹 Terraform 상태 파일이 저장된 S3 버킷
-  TF_STATE_KEY: vpc/terraform.tfstate  # 🔹 상태 파일 키 (폴더 구조)
-
 jobs:
   terraform-destroy:
     name: Terraform Destroy
@@ -27,7 +22,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}  # 🔹 AWS 리전 설정
+          aws-region: ${{ secrets.AWS_REGION }}  # 🔹 AWS 리전 설정
 
       - name: Terraform Init
         run: terraform init
